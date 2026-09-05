@@ -57,9 +57,14 @@
   }
   global.SimpleAdminMonitor = { chartOptions, number, statusNames, availableRadioModes };
 
+  let mounted = false;
   function mount() {
+    // The dashboard must own its DOM before Teleport inserts reactive summary cards.
+    if (mounted || !global.SimpleAdmin.Vue.apps || !global.SimpleAdmin.Vue.apps['#dashboardApp']) return;
     const element = document.getElementById('monitorApp');
     if (!element) return;
+    mounted = true;
+    global.removeEventListener('simpleadmin:vue-mounted', mount);
     const charts = {};
     let timer = null;
     let controller = null;
@@ -169,5 +174,6 @@
     if (global.SimpleAdminIcons) global.SimpleAdminIcons();
     visibility();
   }
+  global.addEventListener('simpleadmin:vue-mounted', mount);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true }); else mount();
 })(window);

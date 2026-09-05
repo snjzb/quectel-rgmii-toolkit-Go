@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const context = { window: {}, document: { readyState: 'loading', addEventListener() {} } };
+const context = { window: { addEventListener() {} }, document: { readyState: 'loading', addEventListener() {} } };
 vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../development/simpleadmin/www/js/monitor.js'), 'utf8'), context);
 const { chartOptions } = context.window.SimpleAdminMonitor;
 test('radio choices hide missing LTE and retain zero SINR', () => {

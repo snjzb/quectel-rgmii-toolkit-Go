@@ -26,6 +26,8 @@ RSRP 与 SINR 同图显示，分别使用左右两侧比例尺；温度、延迟
 
 ## 快速安装
 
+已编译的完整安装包见 [离线安装包](packages/README.md)，解压后即可运行安装脚本。
+
 ### 准备
 
 - Windows 电脑、USB 数据线、已开启 ADB 的 Quectel 模块。
